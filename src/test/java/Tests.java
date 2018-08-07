@@ -69,9 +69,11 @@ public void firstTest(){
 
       driver.findElement(addToCartButton).click();
 
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'layer_cart_product')]//h2")));
+      By successElement = By.xpath("//div[starts-with(@class, 'layer_cart_product')]//h2");
 
-      String successText = driver.findElement(By.xpath("//div[starts-with(@class, 'layer_cart_product')]//h2")).getText();
+      wait.until(ExpectedConditions.visibilityOfElementLocated(successElement));
+
+      String successText = driver.findElement(successElement).getText();
 
       Assert.assertEquals("Item was not added to the cart. Please investigate.", "Product successfully added to your shopping cart" , successText);
 
