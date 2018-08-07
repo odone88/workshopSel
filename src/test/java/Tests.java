@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Tests {
 
 
+
+
 @Test
 public void firstTest(){
 
@@ -54,17 +56,20 @@ public void firstTest(){
 
       driver.navigate().to("http://automationpractice.com");
 
+      WebDriverWait wait = new WebDriverWait(driver, 10);
 
       Actions action = new Actions(driver);
       WebElement we = driver.findElement(By.cssSelector("img[title='Blouse']"));
 
       action.moveToElement(we).build().perform();
 
-      new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[data-id-product='2']")));
+      By addToCartButton = By.cssSelector("a[data-id-product='2']");
 
-      driver.findElement(By.cssSelector("a[data-id-product='2']")).click();
+      wait.until(ExpectedConditions.visibilityOfElementLocated(addToCartButton));
 
-      new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'layer_cart_product')]//h2")));
+      driver.findElement(addToCartButton).click();
+
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'layer_cart_product')]//h2")));
 
       String successText = driver.findElement(By.xpath("//div[starts-with(@class, 'layer_cart_product')]//h2")).getText();
 
@@ -72,7 +77,7 @@ public void firstTest(){
 
       driver.findElement(By.xpath("//*[contains(text(), 'Proceed')]")).click();
 
-      new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Summary')]")));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Summary')]")));
 
       String quantityOfItems = driver.findElement(By.cssSelector("[class*='cart_quantity_input']")).getAttribute("value");
 
