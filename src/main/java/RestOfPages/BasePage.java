@@ -18,6 +18,10 @@ public abstract class BasePage {
         this.wait = wait;
     }
 
+    final By proceedToCheckoutBtn = By.xpath("//*[contains(text(), 'Proceed')]");
+
+    final By proceedToCheckoutBtn2 = By.cssSelector("p.cart_navigation span");
+
     protected boolean isElementPresent(By by) {
         try {
             driver.findElement(by);
@@ -64,7 +68,7 @@ public abstract class BasePage {
     }
 
     protected void mouseOver(By by) {
-        waitForElement(by);
+        waitForElementAndReturn(by, 25);
         Actions action = new Actions(driver);
         action.moveToElement(driver.findElement(by)).build().perform();
     }
@@ -87,6 +91,8 @@ public abstract class BasePage {
     protected List<WebElement> findElements(By elementBy){
         return driver.findElements(elementBy);
     }
+
+
 
 
 }

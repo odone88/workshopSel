@@ -35,13 +35,7 @@ public class DressesPage extends BasePage{
             float priceFloatOld = Float.parseFloat(priceStringOld);
 
             float checkPriceAfterDiscount = priceFloatOld - (discountFloat / 100) * priceFloatOld;
-            if (priceFloat == checkPriceAfterDiscount)
-            {
-                ifDressesDiscountOk = true;
-            }
-            else{
-                ifDressesDiscountOk = false;
-            }
+            ifDressesDiscountOk = priceFloat == checkPriceAfterDiscount;
         }
         return ifDressesDiscountOk;
     }

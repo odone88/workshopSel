@@ -12,7 +12,7 @@ public class ConfirmationBuyingPage extends BasePage{
 
     final By successElement = By.xpath("//div[starts-with(@class, 'layer_cart_product')]//h2");
 
-    final By proceedToCheckoutBtn = By.xpath("//*[contains(text(), 'Proceed')]");
+
 
 
 
