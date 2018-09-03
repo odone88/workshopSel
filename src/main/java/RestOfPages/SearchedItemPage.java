@@ -1,5 +1,6 @@
 package RestOfPages;
 
+import Driver.Driver;
 import ViewPages.LongerViewPage;
 import ViewPages.QuickViewPage;
 import org.openqa.selenium.By;
@@ -16,9 +17,6 @@ public class SearchedItemPage extends BasePage{
 
     final By quickViewPrintedChiffonDress = By.xpath("//*[@title='Printed Chiffon Dress']/../a[2]/span");
 
-    public SearchedItemPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-    }
 
 
     public boolean isFadedElementPresent(){
@@ -31,15 +29,14 @@ public class SearchedItemPage extends BasePage{
 
     public LongerViewPage clickOnPrintedChiffonDress(){
         click(printedChiffonDress);
-        return new LongerViewPage(driver, wait);
+        return new LongerViewPage();
     }
 
     public QuickViewPage hoverQuickViewAndClickIt(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", findElement(printedChiffonDress));
+        //scrollToElement2(printedChiffonDress);
         mouseOver(printedChiffonDress);
         click(quickViewPrintedChiffonDress);
-        return new QuickViewPage(driver, wait);
+        return new QuickViewPage();
     }
 
 

@@ -1,5 +1,6 @@
 package RestOfPages;
 
+import Driver.Driver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,12 +11,14 @@ import java.util.List;
 
 public abstract class BasePage {
 
-    protected WebDriver driver;
     protected WebDriverWait wait;
+    protected Actions actions;
+    JavascriptExecutor js;
 
-    public BasePage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
+    public BasePage() {
+        wait = new WebDriverWait(Driver.getDriver(), 20);
+        actions = new Actions(Driver.getDriver());
+        js = (JavascriptExecutor) Driver.getDriver();
     }
 
     final By proceedToCheckoutBtn = By.xpath("//*[contains(text(), 'Proceed')]");
@@ -24,7 +27,7 @@ public abstract class BasePage {
 
     protected boolean isElementPresent(By by) {
         try {
-            driver.findElement(by);
+            Driver.getDriver().findElement(by);
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -35,10 +38,10 @@ public abstract class BasePage {
     protected void click(By locator) {
         try{
             waitForElement(locator);
-            driver.findElement(locator).click();
+            Driver.getDriver().findElement(locator).click();
         }
         catch(StaleElementReferenceException e){
-            driver.findElement(locator).click();
+            Driver.getDriver().findElement(locator).click();
         }
     }
 
@@ -48,7 +51,7 @@ public abstract class BasePage {
 
     protected String getTextOfElement(By locator){
         waitForElement(locator);
-        return driver.findElement(locator).getText();
+        return Driver.getDriver().findElement(locator).getText();
     }
 
     protected String getTextOfWebElement(WebElement element){
@@ -58,38 +61,47 @@ public abstract class BasePage {
 
     protected String getValueAttributeFromElement(By locator){
         waitForElement(locator);
-        return driver.findElement(locator).getAttribute("value");
+        return Driver.getDriver().findElement(locator).getAttribute("value");
     }
 
     protected void insertText(By locator, String text) {
         waitForElement(locator);
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
+        Driver.getDriver().findElement(locator).clear();
+        Driver.getDriver().findElement(locator).sendKeys(text);
     }
 
     protected void mouseOver(By by) {
         waitForElementAndReturn(by, 25);
-        Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(by)).build().perform();
+        actions.moveToElement(Driver.getDriver().findElement(by)).build().perform();
     }
 
     protected void chooseItemFromDropDownByName(By dropdownLocator, String name){
         waitForElementAndReturn(dropdownLocator, 20);
-        new Select(driver.findElement(dropdownLocator)).selectByVisibleText(name);
+        new Select(Driver.getDriver().findElement(dropdownLocator)).selectByVisibleText(name);
     }
 
     protected WebElement waitForElementAndReturn(By locator, int timeoutInSeconds){
-        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeoutInSeconds);
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-        return driver.findElement(locator);
+        return Driver.getDriver().findElement(locator);
     }
 
     protected WebElement findElement(By elementBy){
-        return driver.findElement(elementBy);
+        return Driver.getDriver().findElement(elementBy);
     }
 
     protected List<WebElement> findElements(By elementBy){
-        return driver.findElements(elementBy);
+        return Driver.getDriver().findElements(elementBy);
+    }
+
+    protected void scrollToElement(By by){
+        waitForElementAndReturn(by, 25);
+        actions.moveToElement(Driver.getDriver().findElement(by));
+    }
+
+    protected void scrollToElement2(By by){
+        waitForElementAndReturn(by, 25);
+        js.executeScript("arguments[0].scrollIntoView();", findElement(by));
     }
 
 

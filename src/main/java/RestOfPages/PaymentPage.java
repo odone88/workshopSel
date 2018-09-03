@@ -1,14 +1,12 @@
 package RestOfPages;
 
+import Driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PaymentPage extends BasePage{
 
-    public PaymentPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-    }
 
     final By amountOfElements = By.cssSelector("td[class*= 'cart_quantity'] span");
 
@@ -19,12 +17,12 @@ public class PaymentPage extends BasePage{
     final By proceedToCheckoutBtn = By.xpath("//*[contains(text(), 'I confirm')]");
 
     public String getAmountOfElements(){
-        return driver.findElement(amountOfElements).getText();
+        return getTextOfElement(amountOfElements);
     }
 
     public String getpriceOfTwoElementsWithoutShipping()
     {
-    return driver.findElement(priceWithoutShipping).getText();
+    return getTextOfElement(priceWithoutShipping);
     }
 
     public PaymentPage clickOnBankWirePayment(){
@@ -34,7 +32,7 @@ public class PaymentPage extends BasePage{
 
     public OrderConfirmation confirmOrder(){
         click(proceedToCheckoutBtn);
-        return new OrderConfirmation(driver, wait);
+        return new OrderConfirmation();
     }
 
 }

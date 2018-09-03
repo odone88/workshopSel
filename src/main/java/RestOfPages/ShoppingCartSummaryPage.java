@@ -1,5 +1,6 @@
 package RestOfPages;
 
+import Driver.Driver;
 import ViewPages.LongerViewPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,10 +9,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ShoppingCartSummaryPage extends BasePage{
-
-    public ShoppingCartSummaryPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-    }
 
     final By quantityOfAddedElements = By.cssSelector("[class*='cart_quantity_input']");
 
@@ -33,15 +30,12 @@ public class ShoppingCartSummaryPage extends BasePage{
 
     public LongerViewPage clickOnContinueShopping(){
         click(continueShoppingBtn);
-        return new LongerViewPage(driver, wait);
+        return new LongerViewPage();
     }
 
     public AuthenticationPage clickOnProceed(){
-        //Actions action = new Actions(driver);
-        //action.moveToElement(driver.findElement(proceedToCheckoutBtn)).build().perform();
-        //JavascriptExecutor js = (JavascriptExecutor) driver;
-        //js.executeScript("arguments[0].scrollIntoView();", findElement(proceedToCheckoutBtn));
+        scrollToElement(proceedToCheckoutBtn);
         click(proceedToCheckoutBtn2);
-        return new AuthenticationPage(driver, wait);
+        return new AuthenticationPage();
     }
 }

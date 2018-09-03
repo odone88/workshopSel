@@ -1,16 +1,13 @@
 package ViewPages;
 
+import Driver.Driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class QuickViewPage extends BaseViewPage {
 
-    public QuickViewPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-    }
-
     public QuickViewPage changeToPrintedChiffonDressFrame(){
-        driver.switchTo().frame(findElement(quickViewIFrame));
+        Driver.getDriver().switchTo().frame(findElement(quickViewIFrame));
         return this;
     }
 
@@ -19,8 +16,8 @@ public class QuickViewPage extends BaseViewPage {
         return this;
     }
 
-    public QuickViewPage changeDressSizeToM(){
-        chooseItemFromDropDownByName(sizeDropDown, "M");
+    public QuickViewPage changeDressSizeToM(String size){
+        chooseItemFromDropDownByName(sizeDropDown, size);
         return this;
     }
 

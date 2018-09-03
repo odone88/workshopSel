@@ -1,14 +1,13 @@
 package RestOfPages;
 
+import Driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ConfirmationBuyingPage extends BasePage{
 
-    public ConfirmationBuyingPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-    }
+
 
     final By successElement = By.xpath("//div[starts-with(@class, 'layer_cart_product')]//h2");
 
@@ -22,7 +21,7 @@ public class ConfirmationBuyingPage extends BasePage{
 
     public ShoppingCartSummaryPage clickOnProceedToCheckoutBtn() {
         click(proceedToCheckoutBtn);
-        return new ShoppingCartSummaryPage(driver, wait);
+        return new ShoppingCartSummaryPage();
     }
 
 

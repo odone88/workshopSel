@@ -1,38 +1,31 @@
 
+import Driver.Driver;
 import RestOfPages.MainPage;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.After;
-
-
 import org.junit.Before;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.Rule;
 
 
+public class BaseTest extends TestRules{
 
-public class BaseTest {
-
-    public WebDriver driver;
-    public WebDriverWait wait;
-    protected MainPage mainPage;
+    MainPage mainPage;
+    SoftAssertions softAssertions;
 
     @Before
     public void setUp(){
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--start-maximized");
-        driver = new ChromeDriver(chromeOptions);
-        driver.manage().deleteAllCookies();
-        wait = new WebDriverWait(driver, 20);
-        driver.get("http://automationpractice.com");
-        mainPage = new MainPage(driver, wait);
+        Driver.getDriver().get("http://automationpractice.com");
+        mainPage = new MainPage();
+        softAssertions = new SoftAssertions();
     }
 
     @After
     public void tearDown() throws Exception {
-        //driver.quit();
+        Driver.quit();
     }
+
+    @Rule
+    public TestRules ruleExample = new TestRules();
 
 
 }

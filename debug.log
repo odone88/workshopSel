@@ -1,0 +1,5 @@
+[0903/203721.105:ERROR:process_info.cc(329)] VirtualQueryEx: Odmowa dostêpu. (0x5)
+[0903/203721.110:ERROR:process_info.cc(550)] ReadMemoryInfo failed
+[0903/203721.117:ERROR:process_reader_win.cc(151)] SuspendThread: Odmowa dostêpu. (0x5)
+[0903/203721.117:ERROR:exception_snapshot_win.cc(88)] thread ID 19036 not found in process
+[0903/203721.117:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Podjêto próbê uzyskania dostêpu do procesu koñcz¹cego dzia³anie. (0xc000010a)

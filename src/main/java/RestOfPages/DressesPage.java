@@ -9,9 +9,6 @@ import java.util.List;
 
 public class DressesPage extends BasePage{
 
-    public DressesPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-    }
 
     final By discount = By.cssSelector(".price-percent-reduction");
     final By newPrice = By.cssSelector(".price");

@@ -1,5 +1,6 @@
 package ViewPages;
 
+import Driver.Driver;
 import RestOfPages.BasePage;
 import RestOfPages.ConfirmationBuyingPage;
 import org.openqa.selenium.By;
@@ -8,9 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BaseViewPage extends BasePage {
 
-    public BaseViewPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-    }
 
     final By addToCartButton = By.xpath("//span[contains(text(),'Add')]");
     final By addQuantityBtn = By.cssSelector(".icon-plus");
@@ -19,7 +17,7 @@ public class BaseViewPage extends BasePage {
 
     public ConfirmationBuyingPage clickOnAddToCartBtn(){
         click(addToCartButton);
-        return new ConfirmationBuyingPage(driver, wait);
+        return new ConfirmationBuyingPage();
     }
 
 

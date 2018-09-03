@@ -22,6 +22,7 @@ public class GeneralTests extends BaseTest {
         ConfirmationBuyingPage confirmationBuyingPage = mainPage.mouseOverBlouse().clickAddToCartButton();
         assertThat(confirmationBuyingPage.getSuccessTextElement()).as("Item was added to the cart without issues").isEqualTo("Product successfully added to your shopping cart");
         ShoppingCartSummaryPage shoppingCartSummaryPage = confirmationBuyingPage.clickOnProceedToCheckoutBtn();
+        softAssertions.assertAll();
         Assert.assertEquals("Item was not added to the cart. Please investigate.", "1" , shoppingCartSummaryPage.getQuantityOfAddedElements());
     }
 
@@ -37,7 +38,7 @@ public class GeneralTests extends BaseTest {
         assertThat(confirmationBuyingPage.getSuccessTextElement()).as("Item was added to the cart without issues").isEqualTo("Product successfully added to your shopping cart");
 
         ShoppingCartSummaryPage shoppingCartSummaryPage = confirmationBuyingPage.clickOnProceedToCheckoutBtn();
-
+        softAssertions.assertAll();
         Assert.assertEquals("Quantity of items is not 2. Please investigate.", "2" , shoppingCartSummaryPage.getQuantityOfAddedElements());
         Assert.assertEquals("The price of item is incorrect. Please investigate.", true , shoppingCartSummaryPage.getPriceFor2ChiffonDress().contains("32.80"));
     }
@@ -56,12 +57,12 @@ public class GeneralTests extends BaseTest {
         assertThat(searchedItemPage.isPrintedChiffonDressElementPresent()).as("Given Dress is displayed").isTrue();
 
         QuickViewPage quickViewPage = searchedItemPage.hoverQuickViewAndClickIt();
-        ConfirmationBuyingPage confirmationBuyingPage = quickViewPage.changeToPrintedChiffonDressFrame().changeDressSizeToM().addQuantityByOne().clickOnAddToCartBtn();
+        ConfirmationBuyingPage confirmationBuyingPage = quickViewPage.changeToPrintedChiffonDressFrame().changeDressSizeToM("M").addQuantityByOne().clickOnAddToCartBtn();
 
         assertThat(confirmationBuyingPage.getSuccessTextElement()).as("Item was added to the cart without issues").isEqualTo("Product successfully added to your shopping cart");
 
         ShoppingCartSummaryPage shoppingCartSummaryPage = confirmationBuyingPage.clickOnProceedToCheckoutBtn();
-
+        softAssertions.assertAll();
         Assert.assertEquals("Quantity of items is not 2. Please investigate.", "2" , shoppingCartSummaryPage.getQuantityOfAddedElements());
         Assert.assertEquals("The price of item is incorrect. Please investigate.", true , shoppingCartSummaryPage.getPriceFor2ChiffonDress().contains("32.80"));
     }
@@ -74,33 +75,6 @@ public class GeneralTests extends BaseTest {
         Assert.assertEquals("There is wrong active element. Please investigate", "passwd", authenticationPage.checkIfPasswordActive());
     }
 
-    @Test
-    public void isItFacebookPage(){
-
-        String facebookTitle = mainPage.clickOnFbLink().SwitchToDifferentWindowAndGetTitle();
-        Assert.assertEquals("There is wrong fb page title. Please investigate", "Grupa publiczna Selenium Framework | Facebook", facebookTitle);
-    }
-
-    @Test
-    public void isItTwitterPage(){
-
-        String twitterTitle = mainPage.clickOnTwitterPage().SwitchToDifferentWindowAndGetTitle();
-        Assert.assertEquals("There is wrong fb page title. Please investigate", "Selenium Framework (@seleniumfrmwrk) | Twitter", twitterTitle);
-    }
-
-    @Test
-    public void isItYouTubePage(){
-
-        String youtubeTitle = mainPage.clickOnYouTubeLink().SwitchToDifferentWindowAndGetTitle();
-        Assert.assertEquals("There is wrong fb page title. Please investigate", "Selenium Framework - YouTube", youtubeTitle);
-    }
-
-    @Test
-    public void itItGooglePlusPage(){
-
-        String googleTitle = mainPage.clickOnGoogleLink().SwitchToDifferentWindowAndGetTitle();
-        Assert.assertEquals("There is wrong fb page title. Please investigate", "Selenium Framework - Google+", googleTitle);
-    }
 
     @Test
     public void shouldUserSearchForChiffonPrintedDressViewItBuyTwoAndCheckEverything(){
@@ -109,7 +83,7 @@ public class GeneralTests extends BaseTest {
         assertThat(searchedItemPage.isPrintedChiffonDressElementPresent()).as("Given Dress is displayed").isTrue();
 
         QuickViewPage quickViewPage = searchedItemPage.hoverQuickViewAndClickIt();
-        ConfirmationBuyingPage confirmationBuyingPage = quickViewPage.changeToPrintedChiffonDressFrame().changeDressSizeToM().addQuantityByOne().clickOnAddToCartBtn();
+        ConfirmationBuyingPage confirmationBuyingPage = quickViewPage.changeToPrintedChiffonDressFrame().changeDressSizeToM("M").addQuantityByOne().clickOnAddToCartBtn();
 
         assertThat(confirmationBuyingPage.getSuccessTextElement()).as("Item was added to the cart without issues").isEqualTo("Product successfully added to your shopping cart");
 
@@ -121,7 +95,7 @@ public class GeneralTests extends BaseTest {
         assertThat(paymentPage.getpriceOfTwoElementsWithoutShipping().contains("32.80")).as("The price of two elements is ok").isEqualTo(true);
 
         OrderConfirmation orderConfirmation = paymentPage.clickOnBankWirePayment().confirmOrder();
-
+        softAssertions.assertAll();
         Assert.assertEquals("There is wrong fb page title. Please investigate", "Your order on My Store is complete.", orderConfirmation.getFinalSuccessText());
 
     }
